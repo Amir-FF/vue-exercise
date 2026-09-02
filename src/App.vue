@@ -1,23 +1,37 @@
 <script setup>
   import { reactive, ref } from "vue";
 
-  const number = ref(2);
-  const array = reactive([2, 4, 6]);
+  // v-html
+  const h1 = ref("<h1>hello would</h1>");
 
-  const find = array.find((arr) => {
-    return arr === 6;
-  });
+  // v-text
+  const msg = ref("number: 2");
+
+  // v-once
+  const vOnce = ref(2);
+
+  //
+  const imgSrc = ref("./img.jpg");
+  const imgAlt = ref("error");
+  const link = ref("https://webprog.io/");
 
   const upadateNubmber = () => {
     setTimeout(() => {
-      number.value = 4;
+      vOnce.value = 4;
     }, 3000);
   };
   upadateNubmber();
 </script>
 
 <template>
-  <h1>number: {{ number }}</h1>
-  <h1>array: {{ array }}</h1>
-  <h1>find: {{ find }}</h1>
+  <div v-html="h1"></div>
+  <div v-text="msg"></div>
+  <div v-once>Unchanged number: {{ vOnce }}</div>
+  <div>The number changes.: {{ vOnce }}</div>
+
+  <br /><br />
+  <img v-bind:src="imgSrc" v-bind:alt="imgAlt" />
+  <br /><br />
+
+  <a :href="link">webprog.ir</a>
 </template>
