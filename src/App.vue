@@ -1,5 +1,7 @@
 <script setup>
   import { ref } from "vue";
+  import "./css/main.css";
+  import "./sass/main.scss";
 
   const age = 34;
   const isAge = 40 < age;
@@ -22,9 +24,21 @@
   <h1 class="bg-black" :class="[isAge ? cla : 'green', 'font-size-20px']">
     hello would
   </h1>
+
+  <h1 class="border">hello would</h1>
+
+  <h1 class="border-sass">hello would</h1>
+
+  <h1 class="border-scoped-sass">hello would</h1>
 </template>
 
-<style>
+<style lang="scss" scoped>
+  $border-scoped: 2px #f00 solid;
+
+  .border-scoped-sass {
+    border: $border-scoped;
+  }
+
   .pink {
     color: pink;
   }
