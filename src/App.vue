@@ -1,37 +1,41 @@
 <script setup>
-  import { reactive, ref } from "vue";
+  import { ref } from "vue";
 
-  // v-html
-  const h1 = ref("<h1>hello would</h1>");
+  // v-show
+  const isVisible = ref(true);
 
-  // v-text
-  const msg = ref("number: 2");
+  // v-if v-else-if v-else
+  const isAge = ref(21);
 
-  // v-once
-  const vOnce = ref(2);
-
-  //
-  const imgSrc = ref("./img.jpg");
-  const imgAlt = ref("error");
-  const link = ref("https://webprog.io/");
-
-  const upadateNubmber = () => {
-    setTimeout(() => {
-      vOnce.value = 4;
-    }, 3000);
-  };
-  upadateNubmber();
+  // v-for key
+  const array = ref([11, 12, 13, 14, 14]);
+  const object = ref([
+    { id: 1, name: "ali" },
+    { id: 2, name: "hossein" },
+  ]);
 </script>
 
 <template>
-  <div v-html="h1"></div>
-  <div v-text="msg"></div>
-  <div v-once>Unchanged number: {{ vOnce }}</div>
-  <div>The number changes.: {{ vOnce }}</div>
+  <h1>hello would</h1>
 
-  <br /><br />
-  <img v-bind:src="imgSrc" v-bind:alt="imgAlt" />
-  <br /><br />
+  <!-- v-show -->
+  <p v-show="isVisible">He/She is over 25 years old. (v-show)</p>
 
-  <a :href="link">webprog.ir</a>
+  <!-- v-if v-else-if v-else -->
+  <p v-if="isAge === 20">He/She is over 20 years old. (v-if)</p>
+  <p v-else-if="isAge === 21">He/She is over 21 years old. (v-else-if)</p>
+  <p v-else>He/She is over 22 years old. (v-else)</p>
+
+  <!-- v-for key -->
+  <ul>
+    <li v-for="(arr, index) in array" :key="index">
+      {{ index }} - {{ arr }} (v-for key array)
+    </li>
+  </ul>
+
+  <ul>
+    <li v-for="obj in object" :key="object.id">
+      {{ obj.id }} - {{ obj.name }} (v-for key object)
+    </li>
+  </ul>
 </template>
