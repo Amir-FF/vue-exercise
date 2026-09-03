@@ -1,41 +1,51 @@
 <script setup>
   import { ref } from "vue";
 
-  // v-show
-  const isVisible = ref(true);
+  const age = 34;
+  const isAge = 40 < age;
 
-  // v-if v-else-if v-else
-  const isAge = ref(21);
+  const style = ref({
+    color: isAge ? "red" : "blue",
+  });
 
-  // v-for key
-  const array = ref([11, 12, 13, 14, 14]);
-  const object = ref([
-    { id: 1, name: "ali" },
-    { id: 2, name: "hossein" },
-  ]);
+  const cla = ref({
+    yellow: isAge,
+    gray: true,
+  });
 </script>
 
 <template>
-  <h1>hello would</h1>
+  <h1 :style="style">hello would</h1>
 
-  <!-- v-show -->
-  <p v-show="isVisible">He/She is over 25 years old. (v-show)</p>
+  <h1 class="pink">hello would</h1>
 
-  <!-- v-if v-else-if v-else -->
-  <p v-if="isAge === 20">He/She is over 20 years old. (v-if)</p>
-  <p v-else-if="isAge === 21">He/She is over 21 years old. (v-else-if)</p>
-  <p v-else>He/She is over 22 years old. (v-else)</p>
-
-  <!-- v-for key -->
-  <ul>
-    <li v-for="(arr, index) in array" :key="index">
-      {{ index }} - {{ arr }} (v-for key array)
-    </li>
-  </ul>
-
-  <ul>
-    <li v-for="obj in object" :key="object.id">
-      {{ obj.id }} - {{ obj.name }} (v-for key object)
-    </li>
-  </ul>
+  <h1 class="bg-black" :class="[isAge ? cla : 'green', 'font-size-20px']">
+    hello would
+  </h1>
 </template>
+
+<style>
+  .pink {
+    color: pink;
+  }
+
+  .yellow {
+    color: yellow;
+  }
+
+  .gray {
+    color: gray;
+  }
+
+  .green {
+    color: green;
+  }
+
+  .bg-black {
+    background-color: black;
+  }
+
+  .font-size-20px {
+    font-size: 20px;
+  }
+</style>
