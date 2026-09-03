@@ -30,6 +30,8 @@
   <h1 class="border-sass">hello would</h1>
 
   <h1 class="border-scoped-sass">hello would</h1>
+
+  <h1 class="text-3xl font-bold underline">Hello world!</h1>
 </template>
 
 <style lang="scss" scoped>
