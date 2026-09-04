@@ -1,28 +1,22 @@
 <script setup>
-  import { reactive, ref } from "vue";
-  import UserProfile from "./Components/UserProfile.vue";
+  import { provide, reactive } from "vue";
+  import CompA from "./Components/CompA.vue";
 
-  const users = reactive([
-    {
-      name: "ali",
-      age: 15,
-    },
-  ]);
+  const user = reactive({
+    name: "amir",
+    age: 22,
+  });
 
-  const parentEditProfile = (nameEmit, ageEmit) => {
-    users[0].name = nameEmit;
-    users[0].age = ageEmit;
+  const updateUsername = (name) => {
+    user.name = name;
   };
+
+  provide("userData", user);
+  provide("updateUsername", updateUsername);
 </script>
 
 <template>
-  <div v-for="(user, index) in users" :id="index" :key="index">
-    <userProfile
-      @emit-profile="parentEditProfile"
-      :name="user.name"
-      :age="user.age"
-    />
-  </div>
+  <CompA />
 </template>
 
 <style>
