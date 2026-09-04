@@ -1,51 +1,61 @@
 <script setup>
-  import { ref } from "vue";
+  import { computed, ref } from "vue";
 
-  const sayHello = (name, family, event) => {
-    console.log("say hello", name, family, event);
+  const name = ref("ali");
+  const num = ref(0);
+  const firstName = ref("amir");
+  const lastName = ref("shamiri");
+
+  const handleEvent = (event) => {
+    console.log(event.target.value);
+
+    name.value = event.target.value;
   };
 
-  const keyHello = () => {
-    console.log("say hello");
-  };
+  const getFullName = computed((prev) => {
+    console.log("prev value, ", prev);
+    console.log("getFullName was called");
+    return firstName.value + " " + lastName.value;
+  });
 </script>
 
 <template>
   <h1 class="text-3xl font-bold underline">Hello world!</h1>
 
-  <button
-    v-on:click.once="sayHello('Amir', 'Shamiri', $event)"
-    type="button"
-    class="btn btn-success m-2"
-  >
-    Success
-  </button>
-
-  <button
-    @click.stop="sayHello('Amir', 'Shamiri', $event)"
-    type="button"
-    class="btn btn-outline-warning"
-  >
-    Warning
-  </button>
-
-  <a @click.prevent href="#">
-    <button type="button" class="btn btn-danger ms-2">Danger</button>
-  </a>
-
-  <form class="w-50 m-2">
-    <div>
-      <label for="exampleInputEmail1" class="form-label">Email address</label>
-      <input
-        @keyup.alt.enter="keyHello"
-        type="email"
-        class="form-control"
-        id="exampleInputEmail1"
-        aria-describedby="emailHelp"
-      />
-      <div id="emailHelp" class="form-text">
-        We'll never share your email with anyone else.
-      </div>
+  <div class="m-3 w-25">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input
+      v-model="name"
+      type="text"
+      class="form-control"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+    />
+    <div id="emailHelp" class="form-text">
+      We'll never share your email with anyone else.
     </div>
-  </form>
+  </div>
+
+  <br />
+
+  <p class="m-3">{{ name }}</p>
+
+  <div
+    class="btn-group m-3"
+    role="group"
+    aria-label="Basic mixed styles example"
+  >
+    <button type="button" class="btn btn-danger" @click="num--">-</button>
+    <button type="button" class="btn btn-success" @click="num++">+</button>
+  </div>
+  <p class="m-3">{{ num }}</p>
+
+  <p>{{ getFullName }}</p>
+  <input class="form-control" type="text" v-model="firstName" />
 </template>
+
+<style>
+  * {
+    margin: 5px;
+  }
+</style>
