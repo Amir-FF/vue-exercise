@@ -1,16 +1,14 @@
 <script setup>
-  import { computed, ref } from "vue";
+  import { computed, ref, watch } from "vue";
 
   const name = ref("ali");
   const num = ref(0);
   const firstName = ref("amir");
   const lastName = ref("shamiri");
 
-  const handleEvent = (event) => {
-    console.log(event.target.value);
-
-    name.value = event.target.value;
-  };
+  watch(num, (newValue, oldValue) => {
+    console.log(oldValue, newValue);
+  });
 
   const getFullName = computed((prev) => {
     console.log("prev value, ", prev);
