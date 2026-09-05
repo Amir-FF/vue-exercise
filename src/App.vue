@@ -16,7 +16,19 @@
 </script>
 
 <template>
-  <CompA />
+  <CompA>
+    <template #header>
+      <h3>card header (slot)</h3>
+    </template>
+
+    <template #default>
+      <h3>card default (slot)</h3>
+    </template>
+
+    <template #footer>
+      <h3>card footer (slot)</h3>
+    </template>
+  </CompA>
 </template>
 
 <style>

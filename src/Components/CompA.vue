@@ -5,6 +5,14 @@
 
 <template>
   <h1>Componet A</h1>
+
+  <div>
+    <slot name="header"></slot>
+    <slot name="default"></slot>
+    <slot name="footer"></slot>
+  </div>
+
   <br />
+
   <CompB />
 </template>
