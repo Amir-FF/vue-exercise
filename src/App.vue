@@ -1,46 +1,61 @@
 <script setup>
-  import { provide, reactive } from "vue";
-  import CompA from "./Components/CompA.vue";
-  import { useCounter } from "./composables/useCounter.js";
+  import {
+    ref,
+    onBeforeMount,
+    onMounted,
+    onBeforeUpdate,
+    onUpdated,
+    onBeforeUnmount,
+    onUnmounted,
+  } from "vue";
 
-  const user = reactive({
-    name: "amir",
-    age: 22,
-  });
+  const count = ref(0);
 
-  const updateUsername = (name) => {
-    user.name = name;
+  const increment = () => {
+    //
+    count.value++;
   };
 
-  provide("userData", user);
-  provide("updateUsername", updateUsername);
+  // --- Lifecycle Hooks ---
 
-  const { counter, plus, minus } = useCounter();
+  console.log("Setup function running (like created) ");
+
+  onBeforeMount(() => {
+    console.log("Component will be mounted.");
+    console.log(document.getElementById("dom-element"));
+  });
+
+  onMounted(() => {
+    console.log("Component is mounted!");
+    const element = document.getElementById("dom-element");
+    if (element) {
+      console.log("DOM Element available:", element);
+      element.style.border = "3px solid red";
+    }
+  });
+
+  onBeforeUpdate(() => {
+    console.log(`Before Update`);
+  });
+
+  onUpdated(() => {
+    console.log(`Updated: Count is ${count.value}`);
+  });
+
+  onBeforeUnmount(() => {
+    console.log("Component will be unmounted. Cleaning up...");
+  });
+
+  onUnmounted(() => {
+    console.log("Component has been unmounted.");
+  });
 </script>
 
 <template>
-  <CompA>
-    <template #header>
-      <h3>card header (slot)</h3>
-    </template>
+  <p>Count: {{ count }}</p>
+  <button @click="increment">increment</button>
 
-    <template #default>
-      <h3>card default (slot)</h3>
-    </template>
-
-    <template #footer>
-      <h3>card footer (slot)</h3>
-    </template>
-  </CompA>
-
-  <h1 class="ms-2">counter</h1>
-  <p class="ms-2">count {{ counter }}</p>
-  <button @click="minus" type="button" class="btn btn-outline-danger ms-2">
-    Danger
-  </button>
-  <button @click="plus" type="button" class="btn btn-outline-primary ms-2">
-    Primary
-  </button>
+  <div id="dom-element">Vue.js - webprog.io</div>
 </template>
 
 <style>
