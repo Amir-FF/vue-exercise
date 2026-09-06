@@ -1,65 +1,31 @@
-<script setup>
-  import {
-    ref,
-    onBeforeMount,
-    onMounted,
-    onBeforeUpdate,
-    onUpdated,
-    onBeforeUnmount,
-    onUnmounted,
-  } from "vue";
-
-  const count = ref(0);
-
-  const increment = () => {
-    //
-    count.value++;
-  };
-
-  // --- Lifecycle Hooks ---
-
-  console.log("Setup function running (like created) ");
-
-  onBeforeMount(() => {
-    console.log("Component will be mounted.");
-    console.log(document.getElementById("dom-element"));
-  });
-
-  onMounted(() => {
-    console.log("Component is mounted!");
-    const element = document.getElementById("dom-element");
-    if (element) {
-      console.log("DOM Element available:", element);
-      element.style.border = "3px solid red";
-    }
-  });
-
-  onBeforeUpdate(() => {
-    console.log(`Before Update`);
-  });
-
-  onUpdated(() => {
-    console.log(`Updated: Count is ${count.value}`);
-  });
-
-  onBeforeUnmount(() => {
-    console.log("Component will be unmounted. Cleaning up...");
-  });
-
-  onUnmounted(() => {
-    console.log("Component has been unmounted.");
-  });
-</script>
+<script setup></script>
 
 <template>
-  <p>Count: {{ count }}</p>
-  <button @click="increment">increment</button>
+  <router-link to="/">Home</router-link>
+  <router-link to="/about">About</router-link>
+  <router-link to="/about/4?name=ali&age=15">About Show</router-link>
 
-  <div id="dom-element">Vue.js - webprog.io</div>
+  <h1>app page</h1>
+
+  <div>
+    <router-view></router-view>
+  </div>
 </template>
 
 <style>
   * {
     margin: 5px;
+  }
+
+  a {
+    text-decoration: none !important;
+  }
+
+  .router-link-active {
+    color: red;
+  }
+
+  .router-link-exact-active {
+    color: green;
   }
 </style>
