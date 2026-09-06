@@ -2,9 +2,18 @@
 
 <template>
   <router-link to="/">Home</router-link>
-  <router-link to="/about">About</router-link>
-  <router-link to="/about/4?name=ali&age=15">About Show</router-link>
-
+  <router-link :to="{ name: 'about' }">About</router-link>
+  <router-link
+    :to="{
+      name: 'about-show',
+      params: { id: 2 },
+      query: { name: 'ali', age: '18' },
+      hash: '#web',
+    }"
+  >
+    About Show
+  </router-link>
+  <!-- /about/4?name=ali&age=15 -->
   <h1>app page</h1>
 
   <div>

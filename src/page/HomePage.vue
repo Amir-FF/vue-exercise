@@ -7,7 +7,12 @@
   };
 
   const goToAboutShowPage = () => {
-    router.push("/about/4?name=ali&age=15");
+    router.push({
+      name: "about-show",
+      params: { id: 2 },
+      query: { name: "ali", age: "18" },
+      hash: "#web",
+    });
   };
 
   const goToPageVue = () => {
